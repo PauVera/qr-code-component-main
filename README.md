@@ -11,12 +11,9 @@ This is a solution to the [QR code component challenge on Frontend Mentor](https
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
   - [AI Collaboration](#ai-collaboration)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -43,61 +40,51 @@ This is a solution to the [QR code component challenge on Frontend Mentor](https
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+The most significant learning from this project came from working through a layout problem that pushed me to think more carefully about how flexbox distributes space.
+My initial approach used `display: grid` with `place-items: center` on the body to center the card. But once I decided to keep the attribution `<footer>` in the HTML, that approach broke down because grid was treating the card and the footer as two items to center together, not as a column where one grows and the other stays at the bottom.
+This fix made something click for me. By switching `body` to `display: flex; flex-direction: column` and giving the `.wrapper` a `flex: 1`, the available viewport height gets distributed intentionally, making the wrapper expand to fill all remaining space, and the footer stays anchored at the bottom withou needing `position: fixed` or any magic number.
 
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
 ```css
-.proud-of-this-css {
-  color: papayawhip;
+/* base layer - body establishes the flex column */
+body {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
 }
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
+
+/* utilities layer - wrapper claims all remaining space  */
+.wrapper {
+  flex: 1;
 }
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+The second thing I practiced was organizing CSS with `@layer`. Separating reset, tokens, base, components, and utilities from the start, even for a small project, kept specificity predictable and made it easy to see where each rule belonged.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+```css
+@layer reset, tokens, base, components, utilities;
+```
+
+Both of these feel like habits worth building early, before projects get complex enough to make them painful to retrofit.
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+The areas I want to keep focusing on in upcoming projects are layout, design systems and accesibility.
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+For layout, I want to get more deliberate about choosing between flexbox and grid from the start, understanding how each works, but more importantly which model fits a given problem before writing any CSS.
 
-### Useful resources
+For design systems, I want to keep practicing th `@layer` and token approach I used here, and gradually develop a more considered system for naming and scaling values (spacing, type, color) in a way that stays consistent across projects.
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+For accesibility, this project was simple enough that it didn't surface many challenges, but I want to make it a habit to think about semantics, focus management, and contrast from the beginning rather than as an afterthought.
 
 ### AI Collaboration
 
-Describe how you used AI tools (if any) during this project. This helps demonstrate your ability to work effectively with AI assistants.
+I used ChatGPT during development to validate my code, explore alternative solutions, and get feedback on semantic HTML and CSS architecture, particularly whether my use of `@layer` made sense for a project of this scale.
 
-- What tools did you use (e.g., ChatGPT, Claude, GitHub Copilot)?
-- How did you use them (e.g., debugging, generating boilerplate, brainstorming solutions)?
-- What worked well? What didn't?
+I used Claude to help me articulate and write this documentation in English, translating what I wanted to say into clear, precise prose.
 
-**Note: Delete this note and the content above if you didn't use AI, or replace with your own experience.**
+In both cases, I wasn't looking for the AI to make decisions for me, but to think out loud with something that could push back. That worked well. What requires more attention is knowing when a suggestion is genuinely better versus just different. That judgement still has to come from me.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- Website - [Pau's Github](https://github.com/PauVera)
+- Frontend Mentor - [@PauVera](https://www.frontendmentor.io/profile/PauVera)
